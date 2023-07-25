@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../HousingBackendSystem/.idea/HousingBackendSystem.iml" filepath="$PROJECT_DIR$/../HousingBackendSystem/.idea/HousingBackendSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../VomeBackendSystem/.idea/VomeBackendSystem.iml" filepath="$PROJECT_DIR$/../VomeBackendSystem/.idea/VomeBackendSystem.iml" />
     </modules>
   </component>
 </project>
