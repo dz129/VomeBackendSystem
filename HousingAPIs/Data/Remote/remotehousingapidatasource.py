@@ -1,9 +1,8 @@
 import requests
 import json
 import sys
-
-sys.path.append('HousingAPIs/Data/Remote/model')
 from model.houseresponse import HouseResponse
+import googlemaps
 
 
 class RemoteHousingAPIDataSource:
@@ -15,6 +14,7 @@ class RemoteHousingAPIDataSource:
     The return values should be a list of the houses in a 50 meter radius
     probably want to map these values into a class
     """
+    googleMapsClient = googlemaps.Client(key="AIzaSyBFnsA9F8RSumIDh6gbTUQGUxeP05CaHmI")
 
     def getHouseAddresses50Meters(self, lat, long):
         jsonResponse = requests.get(
@@ -28,3 +28,7 @@ class RemoteHousingAPIDataSource:
             houseClass = HouseResponse(coordinates[1], coordinates[0])
             HousesList.append(houseClass)
         return HousesList
+
+    def getReverseGeoCodeAddress(self, lat, long):
+        addressResult = self.googleMapsClient.reverse_geocode((lat, long))
+        return addressResult
