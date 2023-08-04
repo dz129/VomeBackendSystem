@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
 @dataclass
-class HouseResponse:
+class LatLongResponse:
     lat: float
     long: float

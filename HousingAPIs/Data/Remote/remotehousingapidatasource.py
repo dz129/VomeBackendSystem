@@ -1,7 +1,7 @@
 import requests
 import json
 import sys
-from model.houseresponse import HouseResponse
+from model.latlongresponse import LatLongResponse
 import googlemaps
 
 
@@ -25,10 +25,14 @@ class RemoteHousingAPIDataSource:
         for home in houses:
             geometry = home["geometry"]
             coordinates = geometry["coordinates"]
-            houseClass = HouseResponse(coordinates[1], coordinates[0])
+            houseClass = LatLongResponse(coordinates[1], coordinates[0])
             HousesList.append(houseClass)
         return HousesList
 
     def getReverseGeoCodeAddress(self, lat, long):
+        #alternatively use this, googles api seems way too expensive
+        #https://api.mapbox.com/geocoding/v5/{endpoint}/{longitude},{latitude}.json
         addressResult = self.googleMapsClient.reverse_geocode((lat, long))
         return addressResult
+
+
