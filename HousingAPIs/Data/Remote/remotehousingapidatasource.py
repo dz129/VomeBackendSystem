@@ -2,6 +2,7 @@ import requests
 import json
 import sys
 from model.latlongresponse import LatLongResponse
+from model.addressresponse import AddressResponse
 import googlemaps
 
 
@@ -33,6 +34,15 @@ class RemoteHousingAPIDataSource:
         #alternatively use this, googles api seems way too expensive
         #https://api.mapbox.com/geocoding/v5/{endpoint}/{longitude},{latitude}.json
         addressResult = self.googleMapsClient.reverse_geocode((lat, long))
-        return addressResult
+        addressResultList = addressResult[0]["address_components"]
+
+        houseNum = addressResultList[0]["long_name"]
+        street = addressResultList[1]["long_name"]
+        city = addressResultList[2]["long_name"]
+        state = addressResultList[4]["long_name"]
+        zipCode = addressResultList[6]["long_name"]
+
+        addressClass = AddressResponse(street, houseNum, city, state, zipCode)
+        return addressClass
 
 
