@@ -3,6 +3,8 @@ import json
 import sys
 from model.latlongresponse import LatLongResponse
 from model.addressresponse import AddressResponse
+from model.config import googleMapsKey
+from model.config import mapboxKey
 import googlemaps
 
 
@@ -15,11 +17,11 @@ class RemoteHousingAPIDataSource:
     The return values should be a list of the houses in a 50 meter radius
     probably want to map these values into a class
     """
-    googleMapsClient = googlemaps.Client(key="AIzaSyBFnsA9F8RSumIDh6gbTUQGUxeP05CaHmI")
+    googleMapsClient = googlemaps.Client(key=googleMapsKey)
 
     def getHouseAddresses50Meters(self, lat, long):
         jsonResponse = requests.get(
-            f"https://api.mapbox.com/v4/mapbox.mapbox-streets-v8/tilequery/{long},{lat}.json?radius=50&limit=50&dedupe&layers=housenum_label&access_token=pk.eyJ1IjoiZGFuaWVsemhhbmcxMjkiLCJhIjoiY2xrbGo0dW51MGI2eTNmcWVoYWRnZHlmeSJ9.BINJdFPV-t-SXnzr7AjuxA").json()
+            f"https://api.mapbox.com/v4/mapbox.mapbox-streets-v8/tilequery/{long},{lat}.json?radius=50&limit=50&dedupe&layers=housenum_label&access_token={mapboxKey}").json()
         houses = jsonResponse["features"]
         # i want this HousesList to have a list fo house objects with lat and long, we can add the addresses later when we do the reverse geocoding
         HousesList = []

@@ -3,8 +3,12 @@ from dataclasses import dataclass
 @dataclass
 class HouseLatLong:
     """
-    First we will initalize the class with lat and long
-    After that, we will reverse geocode and then add the features later
+    to create this class we will combine addressresponse and latlongresponse
     """
     lat: float
     long: float
+    street: str
+    houseNumber: str
+    city: str
+    state: str
+    zip: str
